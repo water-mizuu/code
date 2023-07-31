@@ -196,6 +196,14 @@ class CodeBuilder implements CodeVisitor<String> {
   }
 
   @override
+  String visitLiteralPattern(LiteralPattern pattern) {
+    var buffer = StringBuffer().safe();
+    buffer.write(pattern.literal.acceptVisitor(this));
+
+    return buffer.toString();
+  }
+
+  @override
   String visitNullAssertPattern(NullAssertPattern pattern) {
     var buffer = StringBuffer().safe();
     buffer.write(pattern.subPattern.acceptVisitor(this));

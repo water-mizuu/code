@@ -18,6 +18,7 @@ export "src/implementation/operator/binary.dart";
 export "src/implementation/operator/unary.dart";
 export "src/implementation/pattern_code/constant.dart";
 export "src/implementation/pattern_code/list.dart";
+export "src/implementation/pattern_code/literal.dart";
 export "src/implementation/pattern_code/null_assert.dart";
 export "src/implementation/pattern_code/null_check.dart";
 export "src/implementation/pattern_code/number.dart";

@@ -30,6 +30,7 @@ abstract interface class CodeVisitor<O> {
 
   O visitConstantPattern(ConstantPattern pattern);
   O visitListPattern(ListPattern pattern);
+  O visitLiteralPattern(LiteralPattern pattern);
   O visitNullAssertPattern(NullAssertPattern pattern);
   O visitNullCheckPattern(NullCheckPattern pattern);
   O visitNumberPattern(NumberPattern pattern);
