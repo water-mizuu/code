@@ -16,6 +16,7 @@ export "src/implementation/literal/number.dart";
 export "src/implementation/literal/string.dart";
 export "src/implementation/operator/binary.dart";
 export "src/implementation/operator/unary.dart";
+export "src/implementation/pattern_code/binary.dart";
 export "src/implementation/pattern_code/constant.dart";
 export "src/implementation/pattern_code/list.dart";
 export "src/implementation/pattern_code/literal.dart";

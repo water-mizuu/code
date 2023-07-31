@@ -3,7 +3,6 @@
 import "dart:convert";
 
 import "package:code/code.dart";
-import "package:code/src/implementation/pattern_code/binary.dart";
 
 class CodeBuilder implements CodeVisitor<String> {
   @override

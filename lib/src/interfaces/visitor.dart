@@ -1,5 +1,4 @@
 import "package:code/code.dart";
-import "package:code/src/implementation/pattern_code/binary.dart";
 
 abstract interface class CodeVisitor<O> {
   O visitTrueLiteral(TrueLiteral literal);
