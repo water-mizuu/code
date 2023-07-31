@@ -3,6 +3,7 @@
 import "dart:convert";
 
 import "package:code/code.dart";
+import "package:code/src/implementation/pattern_code/binary.dart";
 
 class CodeBuilder implements CodeVisitor<String> {
   @override
@@ -174,6 +175,18 @@ class CodeBuilder implements CodeVisitor<String> {
 
   @override
   String visitPrefixUnaryOperator(PrefixUnaryOperator operator) => operator.symbol;
+
+  @override
+  String visitBinaryPattern(BinaryPattern pattern) {
+    var buffer = StringBuffer().safe();
+    buffer.write(pattern.left.acceptVisitor(this));
+    buffer.write(" ");
+    buffer.write(pattern.operator.acceptVisitor(this));
+    buffer.write(" ");
+    buffer.write(pattern.right.acceptVisitor(this));
+
+    return buffer.toString();
+  }
 
   @override
   String visitConstantPattern(ConstantPattern pattern) {

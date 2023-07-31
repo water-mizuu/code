@@ -1,4 +1,5 @@
 import "package:code/code.dart";
+import "package:code/src/implementation/pattern_code/binary.dart";
 
 abstract interface class CodeVisitor<O> {
   O visitTrueLiteral(TrueLiteral literal);
@@ -28,6 +29,7 @@ abstract interface class CodeVisitor<O> {
   O visitPostfixUnaryOperator(PostfixUnaryOperator operator);
   O visitPrefixUnaryOperator(PrefixUnaryOperator operator);
 
+  O visitBinaryPattern(BinaryPattern pattern);
   O visitConstantPattern(ConstantPattern pattern);
   O visitListPattern(ListPattern pattern);
   O visitLiteralPattern(LiteralPattern pattern);
