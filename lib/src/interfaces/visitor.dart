@@ -1,5 +1,4 @@
 import "package:code/code.dart";
-import "package:code/src/implementation/pattern_code/variable.dart";
 
 abstract interface class CodeVisitor<O> {
   O visitTrueLiteral(TrueLiteral literal);
@@ -31,7 +30,10 @@ abstract interface class CodeVisitor<O> {
 
   O visitConstantPattern(ConstantPattern pattern);
   O visitListPattern(ListPattern pattern);
+  O visitNullAssertPattern(NullAssertPattern pattern);
+  O visitNullCheckPattern(NullCheckPattern pattern);
   O visitNumberPattern(NumberPattern pattern);
+  O visitParenthesizedPattern(ParenthesizedPattern pattern);
   O visitRelationalPattern(RelationalPattern pattern);
   O visitVariablePattern(VariablePattern pattern);
   O visitWildcardPattern(WildcardPattern pattern);

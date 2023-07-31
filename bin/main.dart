@@ -52,11 +52,8 @@ void main(List<String> arguments) {
                       "function".identifier.expression,
                       [],
                     ),
-                    VariablePattern("name".identifier),
-                    CallExpression(
-                      "function".identifier.expression,
-                      [],
-                    ),
+                    NullCheckPattern(VariablePattern("name".identifier)),
+                    "name".identifier.expression,
                   ),
                 ]),
               ),

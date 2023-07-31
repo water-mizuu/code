@@ -3,7 +3,6 @@
 import "dart:convert";
 
 import "package:code/code.dart";
-import "package:code/src/implementation/pattern_code/variable.dart";
 
 class CodeBuilder implements CodeVisitor<String> {
   @override
@@ -57,14 +56,52 @@ class CodeBuilder implements CodeVisitor<String> {
   }
 
   @override
-  String visitCallExpression(CallExpression expression) => //
-      "${expression.target.acceptVisitor(this)}"
-      "(${expression.arguments.map((Expression e) => e.acceptVisitor(this)).join(", ")})";
+  String visitCallExpression(CallExpression expression) {
+    var buffer = StringBuffer().safe();
+    buffer.write(expression.target.acceptVisitor(this));
+    buffer.write("(");
+    buffer.write(expression.positionalArguments.map((Expression e) => e.acceptVisitor(this)).join(", "));
+    if (expression.namedArguments case Map<IdentifierLiteral, Expression> namedArguments) {
+      if (expression.positionalArguments.isNotEmpty) {
+        buffer.write(", ");
+      }
+      for (var (int i, MapEntry(:IdentifierLiteral key, :Expression value)) in namedArguments.entries.indexed) {
+        buffer.write(key.acceptVisitor(this));
+        buffer.write(": ");
+        buffer.write(value.acceptVisitor(this));
+        if (i < namedArguments.length - 1) {
+          buffer.write(", ");
+        }
+      }
+    }
+    buffer.write(")");
+
+    return buffer.toString();
+  }
 
   @override
-  String visitNullAwareCallExpression(NullAwareCallExpression expression) => //
-      "${expression.target.acceptVisitor(this)}?."
-      "call(${expression.arguments.map((Expression e) => e.acceptVisitor(this)).join(", ")})";
+  String visitNullAwareCallExpression(NullAwareCallExpression expression) {
+    var buffer = StringBuffer().safe();
+    buffer.write(expression.target.acceptVisitor(this));
+    buffer.write("?.call(");
+    buffer.write(expression.positionalArguments.map((Expression e) => e.acceptVisitor(this)).join(", "));
+    if (expression.namedArguments case Map<IdentifierLiteral, Expression> namedArguments) {
+      if (expression.positionalArguments.isNotEmpty) {
+        buffer.write(", ");
+      }
+      for (var (int i, MapEntry(:IdentifierLiteral key, :Expression value)) in namedArguments.entries.indexed) {
+        buffer.write(key.acceptVisitor(this));
+        buffer.write(": ");
+        buffer.write(value.acceptVisitor(this));
+        if (i < namedArguments.length - 1) {
+          buffer.write(", ");
+        }
+      }
+    }
+    buffer.write(")");
+
+    return buffer.toString();
+  }
 
   @override
   String visitIndexExpression(IndexExpression expression) =>
@@ -159,9 +196,37 @@ class CodeBuilder implements CodeVisitor<String> {
   }
 
   @override
+  String visitNullAssertPattern(NullAssertPattern pattern) {
+    var buffer = StringBuffer().safe();
+    buffer.write(pattern.subPattern.acceptVisitor(this));
+    buffer.write("!");
+
+    return buffer.toString();
+  }
+
+  @override
+  String visitNullCheckPattern(NullCheckPattern pattern) {
+    var buffer = StringBuffer().safe();
+    buffer.write(pattern.subPattern.acceptVisitor(this));
+    buffer.write("?");
+
+    return buffer.toString();
+  }
+
+  @override
   String visitNumberPattern(NumberPattern pattern) {
     var buffer = StringBuffer().safe();
     buffer.write(pattern.value.toString());
+
+    return buffer.toString();
+  }
+
+  @override
+  String visitParenthesizedPattern(ParenthesizedPattern pattern) {
+    var buffer = StringBuffer().safe();
+    buffer.write("(");
+    buffer.write(pattern.subPattern.acceptVisitor(this));
+    buffer.write(")");
 
     return buffer.toString();
   }

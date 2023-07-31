@@ -1,6 +1,5 @@
 import "package:code/src/interfaces/expression.dart";
-import "package:code/src/interfaces/statement/statement.dart";
-import "package:code/src/interfaces/statement/traditional_for_init.dart";
+import "package:code/src/interfaces/statement.dart";
 import "package:code/src/interfaces/visitor.dart";
 
 /// Represents a for-loop in the traditional C-style.

@@ -1,5 +1,5 @@
 import "package:code/src/implementation/literal/identifier.dart";
-import "package:code/src/interfaces/statement/statement.dart";
+import "package:code/src/interfaces/statement.dart";
 import "package:code/src/interfaces/visitor.dart";
 
 final class ContinueStatement implements Statement {

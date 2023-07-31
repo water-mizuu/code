@@ -1,5 +1,5 @@
 import "package:code/src/interfaces/expression.dart";
-import "package:code/src/interfaces/statement/statement.dart";
+import "package:code/src/interfaces/statement.dart";
 import "package:code/src/interfaces/visitor.dart";
 
 final class IfStatement implements Statement {
