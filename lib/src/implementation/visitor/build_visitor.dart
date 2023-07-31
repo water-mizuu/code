@@ -283,10 +283,26 @@ class CodeBuilder implements CodeVisitor<String> {
   }
 
   @override
-  String visitIfStatement(IfStatement statement) {
+  String visitConditionalStatement(ConditionalStatement statement) {
     var buffer = StringBuffer().safe();
     buffer.write("if (");
     buffer.write(statement.condition.acceptVisitor(this));
+    buffer.write(") ");
+    buffer.write(statement.thenStatement.acceptVisitor(this));
+    if (statement.elseStatement case Statement elseStatement) {
+      buffer.write(" else ");
+      buffer.write(elseStatement.acceptVisitor(this));
+    }
+    return buffer.toString();
+  }
+
+  @override
+  String visitPatternConditionalStatement(PatternConditionalStatement statement) {
+    var buffer = StringBuffer().safe();
+    buffer.write("if (");
+    buffer.write(statement.target.acceptVisitor(this));
+    buffer.write(" case ");
+    buffer.write(statement.matcher.acceptVisitor(this));
     buffer.write(") ");
     buffer.write(statement.thenStatement.acceptVisitor(this));
     if (statement.elseStatement case Statement elseStatement) {

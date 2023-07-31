@@ -40,7 +40,8 @@ abstract interface class CodeVisitor<O> {
 
   O visitBlockStatement(BlockStatement statement);
   O visitBreakStatement(BreakStatement statement);
-  O visitIfStatement(IfStatement statement);
+  O visitConditionalStatement(ConditionalStatement statement);
+  O visitPatternConditionalStatement(PatternConditionalStatement statement);
   O visitContinueStatement(ContinueStatement statement);
   O visitEmptyStatement(EmptyStatement statement);
   O visitExpressionStatement(ExpressionStatement statement);
